@@ -44,4 +44,6 @@ For a given class, recall of the classifier is an indicator for the sensitivity 
 *Sci-Kit learn implementation*:
 #### F1 score
 F1 score is a combination of precision and recall. It is defined as the harmonic mean of precision and recall, ie. $$\frac{2}{\frac{1}{precision}+\frac{1}{recall}}$$ .
+
+#### Reference
  
