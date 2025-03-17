@@ -25,7 +25,8 @@ Accu
 #### Precision for a specific class of the classifier
 For a given class, precision of the classifier is an indicator for the accuracy of the positive predictions, defined as $$\frac{TP}{TP+FP}$$ . In other words, precision is a measurement of how many positive predictions are exactly positive instances.
 
-*Feature*:
+*Features*:
+The greater the value, the better the performane of the classifier
 
 *Pros*:
 
@@ -35,7 +36,8 @@ For a given class, precision of the classifier is an indicator for the accuracy 
 #### Recall for a specific class of the classifier
 For a given class, recall of the classifier is an indicator for the sensitivity of the positive predictions, defined as $$\frac{TP}{TP+FN}$$ . In other words, recall is a measurement of how many positive instances are correctly predicted as positive.
 
-*Feature*:
+*Features*:
+The greater the value, the better the performance of the classifier
 
 *Pros*:
 
@@ -46,4 +48,6 @@ For a given class, recall of the classifier is an indicator for the sensitivity 
 F1 score is a combination of precision and recall. It is defined as the harmonic mean of precision and recall, ie. $$\frac{2}{\frac{1}{precision}+\frac{1}{recall}}$$ .
 
 #### Reference
+1. https://www.evidentlyai.com/classification-metrics/multi-class-metrics
+2. Scikit-learn, L. W. (2017). Hands-On Machine Learning with Scikit-Learn and TensorFlow. Ò Reilly Media.
  
