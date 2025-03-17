@@ -92,9 +92,13 @@ The ROC curve plots **recall** against **false positive rate (FPR)**. FPR is def
 *Sci-Kit learn implementation*:
 #### Supplementary
 [1] Having similar precision and recall is not always the case. Sometimes, we prefer precision over recall. Sometimes, we care more about recall. It depends on the contexts. Please read p.111 for examples.
+
 [2] Because of the precision/recall trade-off, it is impossible for us to have high values both ways: Please read [Ref](#reference) [3] for more theoretical explaination.
 
 #### Reference
 [1] https://www.evidentlyai.com/classification-metrics/multi-class-metrics
+
 [2] Scikit-learn, L. W. (2017). Hands-On Machine Learning with Scikit-Learn and TensorFlow. Ò Reilly Media.
+
 [3] https://asistdl.onlinelibrary.wiley.com/doi/abs/10.1002/(SICI)1097-4571(199401)45:1%3C12::AID-ASI2%3E3.0.CO;2-L
+
