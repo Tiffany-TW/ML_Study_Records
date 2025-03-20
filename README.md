@@ -3,13 +3,13 @@ This repository contains notes about machine leaning, including concepts and cod
 ## Evaluation metrics
 ### Classification
 For classification methods, the following metrics are commonly used to evaluate the performance of models:
-1. Confusion matrices
-2. Accuracy of the classifier
-3. Precision of the classifier
-4. Recall, also called true positive rate, of the classifier
-5. F1 score
-6. Precision\Recall (PR) curve
-7. The Reciever Operating Characteristics (ROC) curve
+1. [Confusion matrices](#confusion-matrices)
+2. [Accuracy of the classifier](#accuracy-of-the-classifier)
+3. [Precision of the classifier](#precision-for-a-specific-class-of-the-classifier)
+4. [Recall](#recall-for-a-specific-class-of-the-classifier), also called true positive rate, of the classifier
+5. [F1 score](#f1-score)
+6. [Precision\Recall (PR) curve](#precisionrecall-pr-curve)
+7. [The Reciever Operating Characteristics (ROC) curve](#the-reciever-operating-characteristics-roc-curve)
 #### Confusion matrices
 A confusion matrix is a 2-dimensional n by n matrix. Each row in a confusion matrix represents an actual class, while each column represents a predicted class. Each entry indicates the count of instances of class A are classified as class B. Here, we take a two class classification problem (labeled with negative and positive) as an example. That is, n is equal to 2. Then, the confusion matrix is shown as the following:
 |Actual/Prediction|Negative|Positive|
@@ -94,6 +94,9 @@ The ROC curve plots **recall** against **false positive rate (FPR)**. FPR is def
 [1] Having similar precision and recall is not always the case. Sometimes, we prefer precision over recall. Sometimes, we care more about recall. It depends on the contexts. Please read p.111 for examples.
 
 [2] Because of the precision/recall trade-off, it is impossible for us to have high values both ways: Please read [Ref](#reference) [3] for more theoretical explaination.
+
+#### Implementation using Iris dataset
+ecision Tree classifier and SDG classifier are  
 
 #### Reference
 [1] https://www.evidentlyai.com/classification-metrics/multi-class-metrics
