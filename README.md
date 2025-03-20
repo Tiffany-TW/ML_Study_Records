@@ -66,8 +66,6 @@ F1 score is a combination of precision and recall. It is defined as the harmonic
 
 *Sci-Kit learn implementation*:
 
-*Sci-Kit learn implementation*:
-
 #### Precision/Recall (PR) Curve
 Precision/Recall curve provides visualization for determining suitable thresholds for classifiers. Moreover, it shows apparent trends to illustrate the precision/recall trade-off.
 
@@ -96,7 +94,9 @@ The ROC curve plots **recall** against **false positive rate (FPR)**. FPR is def
 [2] Because of the precision/recall trade-off, it is impossible for us to have high values both ways: Please read [Ref](#reference) [3] for more theoretical explaination.
 
 #### Implementation using Iris dataset
-ecision Tree classifier and SDG classifier are  
+Decision Tree classifier and SDG classifier are applied to train models for the classification problem of Iris flower.
+
+1. Binary class
 
 #### Reference
 [1] https://www.evidentlyai.com/classification-metrics/multi-class-metrics
