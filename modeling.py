@@ -16,7 +16,7 @@ from sklearn.model_selection import cross_validate, cross_val_score, cross_val_p
 from sklearn.compose import ColumnTransformer
 from sklearn.dummy import DummyClassifier
 from sklearn.metrics import confusion_matrix
-from sklearn.metrics import precision_recall_curve
+from sklearn.metrics import precision_recall_curve, precision_score, recall_score, f1_score
 
 # # self_defined package: core_lib
 # import os
@@ -119,22 +119,31 @@ cm_tree = confusion_matrix(iris_train_label_bi, cv_predict_tree)
 precisions_tree, recalls_tree, thresholds_tree = precision_recall_curve(iris_train_label_bi, cv_score_tree[:,1])
 
 # precision-recall trade-off
-plt.plot(thresholds_tree, precisions_tree[:-1], "b--", label="Precision", linewidth=2)
-plt.plot(thresholds_tree, recalls_tree[:-1], "g-", label = "Recall", linewidth=2)
-plt.vlines(0.01, 0, 1, "k", "dotted", label="threshold")
-plt.legend()
-plt.xlabel("Threshold")
-plt.show()
+# plt.plot(thresholds_tree, precisions_tree[:-1], "b--", label="Precision", linewidth=2)
+# plt.plot(thresholds_tree, recalls_tree[:-1], "g-", label = "Recall", linewidth=2)
+# plt.vlines(0.01, 0, 1, "k", "dotted", label="threshold")
+# plt.legend()
+# plt.xlabel("Threshold")
+# plt.show()
 
-print(cv_predict_tree)
-print(cv_score_tree)
+# print(cv_predict_tree)
+# print(cv_score_tree)
 print(f"Decision Tree accuracy:{cv_acc_tree}") # mean accuracy for classifier
-print(f"Confusion matrix:{cm_tree}")
+print(f"Decision Tree CM:{cm_tree}")
+print(f"Decision tree precision:{precision_score(iris_train_label_bi, cv_predict_tree)}")
+print(f"Decision tree recall:{recall_score(iris_train_label_bi, cv_predict_tree)}")
+print(f"Decision tree f1_score:{f1_score(iris_train_label_bi, cv_predict_tree)}")
 
 ### dummy classifier
-# dummy_clf = make_pipeline(preprocessing, DummyClassifier())
-# cv_results_dummy = cross_val_score(dummy_clf, iris, iris_train_label_bi, cv=3, scoring = 'accuracy')
-# print(f"Dummy:{cv_results_dummy['test_score']}") # mean accuracy for classifier
+dummy_clf = make_pipeline(preprocessing, DummyClassifier())
+cv_acc_dummy = cross_val_score(dummy_clf, iris, iris_train_label_bi, cv=3, scoring = 'accuracy')
+cv_predict_dummy = cross_val_predict(dummy_clf, iris, iris_train_label_bi, cv=3)
+cm_dummy = confusion_matrix(iris_train_label_bi, cv_predict_dummy)
+print(f"Dummy:{cv_acc_dummy}") # mean accuracy for classifier
+print(f"Dummy CM:{cm_dummy}")
+print(f"Dummy precision:{precision_score(iris_train_label_bi, cv_predict_dummy)}")
+print(f"Dummy recall:{recall_score(iris_train_label_bi, cv_predict_dummy)}")
+print(f"Dummy f1_score:{f1_score(iris_train_label_bi, cv_predict_dummy)}")
 
 ### SGDClassifier
 sgd_clf = make_pipeline(preprocessing, SGDClassifier(random_state=42))
@@ -145,26 +154,30 @@ cm_sgd = confusion_matrix(iris_train_label_bi, cv_predict_sgd)
 precisions_sgd, recalls_sgd, thresholds_sgd = precision_recall_curve(iris_train_label_bi, cv_score_sgd)
 
 # precision-recall trade-off
-plt.plot(thresholds_sgd, precisions_sgd[:-1], "b--", label="Precision", linewidth=2)
-plt.plot(thresholds_sgd, recalls_sgd[:-1], "g-", label = "Recall", linewidth=2)
-plt.vlines(10, 0, 1, "k", "dotted", label="threshold")
-plt.legend()
-plt.xlabel("Threshold")
-plt.show()
+# plt.plot(thresholds_sgd, precisions_sgd[:-1], "b--", label="Precision", linewidth=2)
+# plt.plot(thresholds_sgd, recalls_sgd[:-1], "g-", label = "Recall", linewidth=2)
+# plt.vlines(10, 0, 1, "k", "dotted", label="threshold")
+# plt.legend()
+# plt.xlabel("Threshold")
+# plt.show()
 
-print(cv_predict_sgd)
-print(cv_score_sgd)
+# print(cv_predict_sgd)
+# print(cv_score_sgd)
 print(f"SGD_Classifier:{cv_acc_sgd}") # mean accuracy for classifier
-print(f"Confusion matrix:{cm_sgd}")
+print(f"SGD Confusion matrix:{cm_sgd}")
+print(f"SGD precision:{precision_score(iris_train_label_bi, cv_predict_sgd)}")
+print(f"SGD recall:{recall_score(iris_train_label_bi, cv_predict_sgd)}")
+print(f"SGD f1_score:{f1_score(iris_train_label_bi, cv_predict_sgd)}")
+
 
 # PR curve between decision tree and sgd classifier
-plt.plot(recalls_tree, precisions_tree, "b--", linewidth=2, label="Decision Tree")
-plt.plot(recalls_sgd, precisions_sgd, "b-", linewidth=2, label="SGD")
-plt.legend()
-plt.xlabel("Recall")
-plt.ylabel("Precision")
-plt.title("Comparing PR curves between the decision tree classifier and the sgd classifier")
-plt.show()
+# plt.plot(recalls_tree, precisions_tree, "b--", linewidth=2, label="Decision Tree")
+# plt.plot(recalls_sgd, precisions_sgd, "b-", linewidth=2, label="SGD")
+# plt.legend()
+# plt.xlabel("Recall")
+# plt.ylabel("Precision")
+# plt.title("Comparing PR curves between the decision tree classifier and the sgd classifier")
+# plt.show()
 
 
 

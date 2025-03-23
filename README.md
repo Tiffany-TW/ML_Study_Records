@@ -88,6 +88,7 @@ The ROC curve plots **recall** against **false positive rate (FPR)**. FPR is def
 *Pros*:
 *Cons*:
 *Sci-Kit learn implementation*:
+
 #### Supplementary
 [1] Having similar precision and recall is not always the case. Sometimes, we prefer precision over recall. Sometimes, we care more about recall. It depends on the contexts. Please read p.111 for examples.
 
@@ -96,7 +97,42 @@ The ROC curve plots **recall** against **false positive rate (FPR)**. FPR is def
 #### Implementation using Iris dataset
 Decision Tree classifier and SDG classifier are applied to train models for the classification problem of Iris flower.
 
-1. Binary class
+**Binary classification problem** 
+Description: The binary classification problem aims at detecting Iris-virginica through the length and width of sepals and petals.
+- Skewed Dataset? : Iris-virginica comprises one-third of the total sample size. Even though the amount of positive and negative samples are not equal, it is not likely to be imbalanced. Please see more info on [Ref](#reference) [4].
+- Training Results: 
+    - Basic evaluation metrics of both Decision Tree classifier, and SDG classifier are shown in the following table. The table also includes dummy classifier as the control group. (cv = 3)
+
+        ||Dummy|DT|SGD|
+        |----|----|----|----|
+        |Mean Accuracy|0.675|0.95|0.975|
+        |Precision|ill-defined|0.923|0.974|
+        |Recall|ill-defined|0.923|0.949|
+        |F1 score|ill-defined|0.923|0.961|
+
+    - Confusion matrices
+
+        |Dummy|Negative|Positive|
+        |----|----|----|
+        |Negative|81|0|
+        |Positive|39|0|
+
+        |DT|Negative|Positive|
+        |----|----|----|
+        |Negative|78|3|
+        |Positive|3|36|
+
+        |SGD|Negative|Positive|
+        |----|----|----|
+        |Negative|80|1|
+        |Positive|2|37|
+    
+    From the above metrics, we may conclude that the performance of the SGD classifier is better than the decision tree classifier. This conclusion can also be validated by the PR curve, where the curve of SGD is more closer to the top-right corner than that of the decision tree.
+    - PR curve
+    ![PR](/Figure/Figure_modeling_3.png)
+    In addition to justify the performance of thw two classifiers, the PR curve also provides information for fine-tuning the classifier. In this case, we prefer better recall over precision. Thus, the threshold of the decision function turns out to be 
+
+
 
 #### Reference
 [1] https://www.evidentlyai.com/classification-metrics/multi-class-metrics
@@ -104,4 +140,6 @@ Decision Tree classifier and SDG classifier are applied to train models for the 
 [2] Scikit-learn, L. W. (2017). Hands-On Machine Learning with Scikit-Learn and TensorFlow. Ò Reilly Media.
 
 [3] https://asistdl.onlinelibrary.wiley.com/doi/abs/10.1002/(SICI)1097-4571(199401)45:1%3C12::AID-ASI2%3E3.0.CO;2-L
+
+[4] https://datascience.stackexchange.com/questions/122571/determining-whether-a-dataset-is-imbalanced-or-not
 
