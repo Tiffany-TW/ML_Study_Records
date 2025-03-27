@@ -16,7 +16,7 @@ from sklearn.model_selection import cross_validate, cross_val_score, cross_val_p
 from sklearn.compose import ColumnTransformer
 from sklearn.dummy import DummyClassifier
 from sklearn.metrics import confusion_matrix
-from sklearn.metrics import precision_recall_curve, precision_score, recall_score, f1_score
+from sklearn.metrics import precision_recall_curve, precision_score, recall_score, f1_score, roc_curve
 
 # # self_defined package: core_lib
 # import os
@@ -152,6 +152,7 @@ cv_predict_sgd = cross_val_predict(sgd_clf, iris, iris_train_label_bi, cv=3)
 cv_score_sgd = cross_val_predict(sgd_clf, iris, iris_train_label_bi, cv=3, method="decision_function")
 cm_sgd = confusion_matrix(iris_train_label_bi, cv_predict_sgd)
 precisions_sgd, recalls_sgd, thresholds_sgd = precision_recall_curve(iris_train_label_bi, cv_score_sgd)
+fpr_sgd, tpr_sgd, thresholds_sgd_roc = roc_curve(iris_train_label_bi, cv_score_sgd)
 
 # precision-recall trade-off
 # plt.plot(thresholds_sgd, precisions_sgd[:-1], "b--", label="Precision", linewidth=2)
@@ -171,6 +172,9 @@ print(f"SGD f1_score:{f1_score(iris_train_label_bi, cv_predict_sgd)}")
 
 
 # PR curve between decision tree and sgd classifier
+idx_for_90_precision = (precisions_sgd >= 0.9).argmax()
+threshold_for_90_precision = thresholds_sgd[idx_for_90_precision]
+print(threshold_for_90_precision)
 # plt.plot(recalls_tree, precisions_tree, "b--", linewidth=2, label="Decision Tree")
 # plt.plot(recalls_sgd, precisions_sgd, "b-", linewidth=2, label="SGD")
 # plt.legend()
@@ -179,6 +183,27 @@ print(f"SGD f1_score:{f1_score(iris_train_label_bi, cv_predict_sgd)}")
 # plt.title("Comparing PR curves between the decision tree classifier and the sgd classifier")
 # plt.show()
 
+# ROC curve
+idx_for_thresh_at_90 = (thresholds_sgd_roc <= threshold_for_90_precision).argmax()
+fpr_90, tpr_90 = fpr_sgd[idx_for_thresh_at_90], tpr_sgd[idx_for_thresh_at_90]
+plt.plot(fpr_sgd, tpr_sgd, linewidth=2, label="ROC curve")
+plt.plot([0,1], [0,1], 'k:', label="Random classifier's ROC curve")
+plt.plot([fpr_90], [tpr_90], "ko", label=f"Threshold for 90% precision = {round(thresholds_sgd_roc[idx_for_thresh_at_90], 3)}")
+plt.legend()
+plt.xlabel("False Positive Rate (Fall-out)")
+plt.ylabel("True Positive Rate (Recall)")
+plt.title("The ROC curve of both the SGD classifier and the random classifier")
+plt.show()
+
+# select best threshold interval for the decision function of SGD classifier
+metric_df = pd.DataFrame()
+metric_df["precisions"] = precisions_sgd[:-1]
+metric_df["recalls"] = recalls_sgd[:-1]
+metric_df["thresholds"] = thresholds_sgd
+print(metric_df)
+
+select_df = metric_df[(metric_df["precisions"] <= metric_df["recalls"]) & (metric_df["precisions"] > 0.9)]
+print(select_df)
 
 
 

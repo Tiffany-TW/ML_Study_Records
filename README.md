@@ -130,7 +130,12 @@ Description: The binary classification problem aims at detecting Iris-virginica 
     From the above metrics, we may conclude that the performance of the SGD classifier is better than the decision tree classifier. This conclusion can also be validated by the PR curve, where the curve of SGD is more closer to the top-right corner than that of the decision tree.
     - PR curve
     ![PR](/Figure/Figure_modeling_3.png)
-    In addition to justify the performance of thw two classifiers, the PR curve also provides information for fine-tuning the classifier. In this case, we prefer better recall over precision. Thus, the threshold of the decision function turns out to be 
+    In addition to justifying the performance of the two classifiers, the PR curve also provides information for fine-tuning the classifier. In this case, I prefer better recall over precision since I expect to have all the Iris-virginica detected. Moreover, precision shall not be under 0.8. Three pairs of precision and recall satisfied the restrictions. Arranged in the order of (precision, recall, threshold of decision function),  they are (0.866667, 1, -3.815040), (0.926829, 0.974359, -1.143001), and (0.925000, 0.948718, -0.585358). These cases will later be used to fine tune the SGD model.
+    - ROC curve  
+    ![ROC](/Figure/Figure_modeling_5.png)
+    The ROC curve of the SGD classifier is toward the top-left of the figure. This also indicates that the SGD classifier is quite a good model for this binary classification problem.
+* Fine tune the model
+
 
 
 
