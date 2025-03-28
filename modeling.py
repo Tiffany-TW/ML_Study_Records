@@ -205,6 +205,46 @@ print(metric_df)
 select_df = metric_df[(metric_df["precisions"] <= metric_df["recalls"]) & (metric_df["precisions"] > 0.9)]
 print(select_df)
 
+# By adjusting the threshold of decision function, the binary classification result differs
+thresh = -1.143001
+idx_for_thresh = (cv_score_sgd >= thresh)
+iris_label_decision = pd.DataFrame()
+pred = []
+iris_label_decision["correct answer"] = iris_train_label_bi
+iris_label_decision["origin_pred"] = cv_predict_sgd
+for i in range(len(iris)):
+    if idx_for_thresh[i] == True:
+        pred.append(True)
+    else:
+        pred.append(False)
+iris_label_decision[f"threshold={thresh}"] = pred
 
+print(iris_label_decision[iris_label_decision["correct answer"]!= iris_label_decision[f"threshold={thresh}"]])
+print(iris_label_decision[iris_label_decision["correct answer"]!= iris_label_decision["origin_pred"]])
+print(recall_score(iris_train_label_bi, iris_label_decision[f"threshold={thresh}"]))
 
+# Apply the model to test set
+sgd_clf.fit(iris, iris_train_label_bi)
+final_predictions = sgd_clf.predict(iris_test)
+final_recall = recall_score(iris_test_label_bi, final_predictions)
+final_precision = precision_score(iris_test_label_bi, final_predictions)
+final_decision = sgd_clf.decision_function(iris_test)
+print(f"precision:{final_precision}")
+print(final_recall)
+
+idx_for_thresh_test = (final_decision >= thresh)
+iris_label_decision_test = pd.DataFrame()
+pred_test = []
+iris_label_decision_test["correct answer"] = iris_test_label_bi
+iris_label_decision_test["origin_pred"] = final_predictions
+for i in range(len(iris_test)):
+    if idx_for_thresh_test[i] == True:
+        pred_test.append(True)
+    else:
+        pred_test.append(False)
+iris_label_decision_test[f"threshold={thresh}"] = pred_test
+print(iris_label_decision_test)
+print(recall_score(iris_test_label_bi, iris_label_decision_test[f"threshold={thresh}"]))
+print(precision_score(iris_test_label_bi, iris_label_decision_test[f"threshold={thresh}"]))
+print(confusion_matrix(iris_test_label_bi, iris_label_decision_test[f"threshold={thresh}"]))
 # %%
