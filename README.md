@@ -6,7 +6,7 @@ For classification methods, the following metrics are commonly used to evaluate 
 1. [Confusion matrices](#confusion-matrices)
 2. [Accuracy of the classifier](#accuracy-of-the-classifier)
 3. [Precision of the classifier](#precision-for-a-specific-class-of-the-classifier)
-4. [Recall](#recall-for-a-specific-class-of-the-classifier), also called true positive rate, of the classifier
+4. [Recall, also called true positive rate, of the classifier](#recall-for-a-specific-class-of-the-classifier)
 5. [F1 score](#f1-score)
 6. [Precision\Recall (PR) curve](#precisionrecall-pr-curve)
 7. [The Reciever Operating Characteristics (ROC) curve](#the-reciever-operating-characteristics-roc-curve)
@@ -21,7 +21,7 @@ Note: When a binary classification problem is labeled with negative and positive
 
 After a confusion matrix has been computed, more concise metrics such as **accuracy**, **precision**, **recall**, and **the ROC curve** could be computed accordingly.
 #### Accuracy of the classifier
-Accuracy is an indicator for the correctedness of the total predictions. It is defined as $$\frac{correct~predictions}{All~predictions} \equiv \frac{TN+TP}{TN+TP+FN+FP}$$
+Accuracy is an indicator for the correctedness of the total predictions. It is defined as $$\frac{TN+TP}{TN+TP+FN+FP}$$
 #### Precision for a specific class of the classifier
 For a given class, precision of the classifier is an indicator for the accuracy of the positive predictions, defined as $$\frac{TP}{TP+FP}$$ . In other words, precision is a measurement of how many positive predictions are exactly positive instances.
 
@@ -33,7 +33,7 @@ For a given class, precision of the classifier is an indicator for the accuracy 
 
 *Cons*:
 
-*Sci-Kit learn implementation*: precision_score(true_label, prediction)
+*Sci-Kit learn implementation*: *precision_score(true_label, prediction)*
 #### Recall for a specific class of the classifier
 For a given class, recall of the classifier is an indicator for the sensitivity of the positive predictions, defined as $$\frac{TP}{TP+FN}$$ . In other words, recall is a measurement of how many positive instances are correctly predicted as positive, which is also called **sensitivity** or **TPR**.
 
@@ -45,7 +45,7 @@ For a given class, recall of the classifier is an indicator for the sensitivity 
 
 *Cons*:
 
-*Sci-Kit learn implementation*: recall_score(true_label, prediction)
+*Sci-Kit learn implementation*: *recall_score(true_label, prediction)*
 #### F1 score
 F1 score is a combination of precision and recall. It is defined as the harmonic mean of precision and recall, ie. $$\frac{2}{\frac{1}{precision}+\frac{1}{recall}}$$ .
 
@@ -64,7 +64,7 @@ F1 score is a combination of precision and recall. It is defined as the harmonic
 
 *Cons*:
 
-*Sci-Kit learn implementation*: f1_score(true_label, prediction)
+*Sci-Kit learn implementation*: *f1_score(true_label, prediction)*
 
 #### Precision/Recall (PR) Curve
 Precision/Recall curve provides visualization for determining suitable thresholds for classifiers. Moreover, it shows apparent trends to illustrate the precision/recall trade-off.
@@ -74,8 +74,10 @@ Precision/Recall curve provides visualization for determining suitable threshold
 2. It is suitable for the cases where the positive class is rare or when we care more about the false positives than the false negatives. 
 
 *Pros*:
+
 *Cons*:
-*Sci-Kit learn implementation*: precision_recall_curve(true_label, prediction)
+
+*Sci-Kit learn implementation*: *precision_recall_curve(true_label, prediction)*
 
 #### The Reciever Operating Characteristics (ROC) curve
 The ROC curve plots **recall** against **false positive rate (FPR)**. FPR is defined as $\frac{FP}{TP+FP}$ . Actually, FPR is also equal to 1 - TNR (true negative rate, called specificity). TNR is defined as $\frac{TN}{TN+FN}$ .
@@ -86,7 +88,9 @@ The ROC curve plots **recall** against **false positive rate (FPR)**. FPR is def
 3. The area under the curve (AUC) of a ROC curve of a purely random classifier is 0.5. For a perfect classifier, its AUC is equal to 1.
 
 *Pros*:
+
 *Cons*:
+
 *Sci-Kit learn implementation*: roc_curve(true_label, prediction)
 
 #### Supplementary
@@ -130,10 +134,10 @@ Description: The binary classification problem aims at detecting Iris-virginica 
     From the above metrics, we may conclude that the performance of the SGD classifier is better than the decision tree classifier. This conclusion can also be validated by the PR curve, where the curve of SGD is more closer to the top-right corner than that of the decision tree.
     - PR curve
     ![PR](/Figure/Figure_modeling_3.png)
-    In addition to justifying the performance of the two classifiers, the PR curve also provides information for fine-tuning the classifier. In this case, I prefer better recall over precision since I expect to have all the Iris-virginica detected. It sounds great When precision and recall are 0.926829 and 0.974359 respectively. In this case, decision score equals to -1.143001. This value will be helpful for fine-tuning the SGD classifier.
+    In addition to justifying the performance of the two classifiers, the PR curve also provides information for fine-tuning the classifier. In this case, I prefer better recall over precision since I expect to have all the Iris-virginica detected. It sounds great when precision and recall are 0.926829 and 0.974359 respectively. In this case, decision score equals to -1.143001. This value will be helpful for fine-tuning the SGD classifier.
     - ROC curve  
     ![ROC](/Figure/Figure_modeling_5.png)
-    The ROC curve of the SGD classifier is toward the top-left of the figure. This also indicates that the SGD classifier is quite a good model for this binary classification problem.
+    The ROC curve of the SGD classifier is toward the top-left of the figure. This again indicates that the SGD classifier is quite a good model for this binary classification problem.
 * Fine-tuning the model and apply the classifer to the test set:
 We are not allowed to modify the value of decision functions directly in the function. Instead, we calculate the decision score of the prediction and  classify true instances from false instances based on the assigned threshld. After applying the threshold which is equal to -1.143001, the evaluation metrics for the test set are shown as follows:
     * Confusion matrix
@@ -144,7 +148,8 @@ We are not allowed to modify the value of decision functions directly in the fun
     |Positive|0|11|
 
     * precision and recall scores are 0.917 and 1 respectively.
-    The evaluation metrics for the test set indicate that the classifer just built is nice.
+
+    **To sum up, the classifier for the binary classification problem performs well according to the evaluation metrics on the test set.**
 
 
 
