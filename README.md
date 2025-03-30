@@ -29,10 +29,6 @@ For a given class, precision of the classifier is an indicator for the accuracy 
 1. $ 0 \leq \text{precision} \leq 1 $
 2. The greater the value, the better the performance of the classifier
 
-*Pros*:
-
-*Cons*:
-
 *Sci-Kit learn implementation*: *precision_score(true_label, prediction)*
 #### Recall for a specific class of the classifier
 For a given class, recall of the classifier is an indicator for the sensitivity of the positive predictions, defined as $$\frac{TP}{TP+FN}$$ . In other words, recall is a measurement of how many positive instances are correctly predicted as positive, which is also called **sensitivity** or **TPR**.
@@ -40,10 +36,6 @@ For a given class, recall of the classifier is an indicator for the sensitivity 
 *Features*:
 1. $ 0 \leq \text{recall} \leq 1 $
 2. The greater the value, the better the performance of the classifier
-
-*Pros*:
-
-*Cons*:
 
 *Sci-Kit learn implementation*: *recall_score(true_label, prediction)*
 #### F1 score
@@ -59,11 +51,6 @@ F1 score is a combination of precision and recall. It is defined as the harmonic
     - When precision = $\frac{2}{3}$, and recall = $\frac{2}{3}$, then F1 score = $\frac{2}{3} \approx$ 0.66
     - In summary, with similar precision and recall ([Suppl](#supplementary) [1,2]), the uniqueness of F1 score is guaranteed. Otherwise, comparison among different classifiers is meaningless.
 
-
-*Pros*:
-
-*Cons*:
-
 *Sci-Kit learn implementation*: *f1_score(true_label, prediction)*
 
 #### Precision/Recall (PR) Curve
@@ -72,10 +59,6 @@ Precision/Recall curve provides visualization for determining suitable threshold
 *Features*:
 1. The curve of a good classifier is closer to the top-right corner.
 2. It is suitable for the cases where the positive class is rare or when we care more about the false positives than the false negatives. 
-
-*Pros*:
-
-*Cons*:
 
 *Sci-Kit learn implementation*: *precision_recall_curve(true_label, prediction)*
 
@@ -86,10 +69,6 @@ The ROC curve plots **recall** against **false positive rate (FPR)**. FPR is def
 1. There is trade-off between recall (TPR) and FPR. That is, the higher the recall (TPR), the more FPR the classifier produces.
 2. The ROC curve of a good classifier is closer to the top-left corner.
 3. The area under the curve (AUC) of a ROC curve of a purely random classifier is 0.5. For a perfect classifier, its AUC is equal to 1.
-
-*Pros*:
-
-*Cons*:
 
 *Sci-Kit learn implementation*: roc_curve(true_label, prediction)
 
