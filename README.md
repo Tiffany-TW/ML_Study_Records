@@ -144,3 +144,14 @@ We are not allowed to modify the value of decision functions directly in the fun
 
 [4] https://datascience.stackexchange.com/questions/122571/determining-whether-a-dataset-is-imbalanced-or-not
 
+### Regression
+
+## Supervised Machine Learning Models and Their Training Algorithms
+### Linear Regression Model
+#### Gradient Descent
+### Polynomial Regression Model
+### Regularized Linear Models
+### Logistic Regression Model
+### Support Vector Machines
+### Decision Trees
+### Ensemble Learning and Random Forests
