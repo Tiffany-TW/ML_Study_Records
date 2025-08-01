@@ -149,6 +149,7 @@ We are not allowed to modify the value of decision functions directly in the fun
 ## Supervised Machine Learning Models and Their Training Algorithms
 ### Linear Regression Model
 #### Gradient Descent
+There are variations to the gradient descent algorithms.
 ### Polynomial Regression Model
 ### Regularized Linear Models
 ### Logistic Regression Model
