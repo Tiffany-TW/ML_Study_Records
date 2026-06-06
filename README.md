@@ -158,3 +158,4 @@ There are variations to the gradient descent algorithms..
 ### Support Vector Machines
 ### Decision Trees
 ### Ensemble Learning and Random Forests
+### Bayesian Inference
